@@ -85,7 +85,7 @@ function InfiniteStage() {
       const toNode = nodes.find((n) => n.id === transaction.to);
 
       if (toNode) {
-        console.log('got here: ', `${node.id}-${toNode.id}`);
+        // console.log('got here: ', `${node.id}-${toNode.id}`);
         lines.push(
           <Line
             key={`${node.id}-${toNode.id}`}
@@ -104,11 +104,6 @@ function InfiniteStage() {
       }
     });
   });
-
-  React.useEffect(() => {
-    console.log(stagePos);
-    console.log(nodes);
-  }, [stagePos]);
 
   return (
     <Stage

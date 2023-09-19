@@ -3,6 +3,9 @@
  *        See https://github.com/webpack-contrib/sass-loader#imports
  */
 
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;200;300;400;500;600;700;800;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700;800;900&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -16,14 +19,16 @@
   --orange: #ef882e;
 }
 
+html {
+  margin: 0;
+}
+
 body {
-  position: relative;
   color: white;
-  height: 100vh;
+  margin: 0;
+  padding: 0;
   background: #1a1a1a;
-  font-family: sans-serif;
+  font-family: Montserrat;
   overflow-y: hidden;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  overflow-x: hidden;
 }
