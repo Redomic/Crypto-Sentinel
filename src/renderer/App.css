@@ -1,0 +1,29 @@
+/*
+ * @NOTE: Prepend a `~` to css file paths that are in your node_modules
+ *        See https://github.com/webpack-contrib/sass-loader#imports
+ */
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --primary: #111111;
+  --secondary: #252525;
+  --green: #9abb53;
+  --red: #bc3326;
+  --blue: #0070d8;
+  --orange: #ef882e;
+}
+
+body {
+  position: relative;
+  color: white;
+  height: 100vh;
+  background: #1a1a1a;
+  font-family: sans-serif;
+  overflow-y: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
