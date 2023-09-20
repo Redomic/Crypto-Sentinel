@@ -1,8 +1,13 @@
 import React from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 
 import { Stage, Layer, Rect, Circle, Line } from 'react-konva';
 
+import { setDragging, setPosition } from '../store/slices/common';
+
 function InfiniteStage() {
+  const dispatch = useDispatch();
+
   const WIDTH = 90;
   const HEIGHT = 90;
 
@@ -44,7 +49,12 @@ function InfiniteStage() {
     },
   ]);
 
-  const [stagePos, setStagePos] = React.useState({ x: 0, y: 0 });
+  const [stagePos, setStagePos] = React.useState(
+    useSelector((state: any) => {
+      return state.common.canvas;
+    }),
+  );
+
   const startX = Math.floor((-stagePos.x - window.innerWidth) / WIDTH) * WIDTH;
   const endX =
     Math.floor((-stagePos.x + window.innerWidth * 2) / WIDTH) * WIDTH;
@@ -85,7 +95,6 @@ function InfiniteStage() {
       const toNode = nodes.find((n) => n.id === transaction.to);
 
       if (toNode) {
-        // console.log('got here: ', `${node.id}-${toNode.id}`);
         lines.push(
           <Line
             key={`${node.id}-${toNode.id}`}
@@ -105,6 +114,11 @@ function InfiniteStage() {
     });
   });
 
+  React.useEffect(() => {
+    dispatch(setPosition({ x: stagePos.x, y: stagePos.y }));
+    dispatch(setDragging(stagePos.dragging));
+  }, [stagePos]);
+
   return (
     <Stage
       x={stagePos.x}
@@ -112,8 +126,11 @@ function InfiniteStage() {
       width={window.innerWidth}
       height={window.innerHeight}
       draggable
+      onDragStart={(e) => {
+        setStagePos({ ...e.currentTarget.position(), dragging: true });
+      }}
       onDragEnd={(e) => {
-        setStagePos(e.currentTarget.position());
+        setStagePos({ ...e.currentTarget.position(), dragging: false });
       }}
     >
       <Layer>{gridComponents}</Layer>

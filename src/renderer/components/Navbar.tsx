@@ -1,10 +1,16 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
 import './Navbar.css';
 
 const Navbar = () => {
-  const [tab, selectedTab] = React.useState('networks');
+  const [tab, setTab] = React.useState('networks');
+  const [dragging, setDragging] = React.useState(
+    useSelector((state: any) => {
+      return state.common.canvas.dragging;
+    }),
+  );
 
   const networksIcon = (
     <svg
@@ -80,13 +86,28 @@ const Navbar = () => {
     <div className="navbar-container">
       <div className="navbar">
         <h1 className="navbar__header">Crypto Sentinel</h1>
-        {/* <hr className="navbar__divider" /> */}
         <div className="navbar__button-container">
-          <Link className="navbar__button" to={'/'}>
+          <Link
+            className={`navbar__button ${
+              tab === 'networks' ? 'navbar__button__selected' : null
+            }`}
+            onClick={() => {
+              setTab('networks');
+            }}
+            to={'/'}
+          >
             <span className="navbar__button-icon">{networksIcon}</span>
             <span className="navbar__button-text">Networks</span>
           </Link>
-          <Link className="navbar__button" to={'/'}>
+          <Link
+            className={`navbar__button ${
+              tab === 'alerts' ? 'navbar__button__selected' : null
+            }`}
+            onClick={() => {
+              setTab('alerts');
+            }}
+            to={'/alerts'}
+          >
             <span className="navbar__button-icon">{alertsIcon}</span>
             <span className="navbar__button-text">Alerts</span>
           </Link>

@@ -4,6 +4,7 @@ import './App.css';
 import NetworksPage from './Pages/NetworksPage';
 
 import Navbar from './components/Navbar';
+import AlertsPage from './Pages/AlertsPage';
 
 export default function App() {
   return (
@@ -11,6 +12,7 @@ export default function App() {
       <Navbar />
       <Routes>
         <Route path="/" element={<NetworksPage />} />
+        <Route path="/alerts" element={<AlertsPage />} />
       </Routes>
     </Router>
   );

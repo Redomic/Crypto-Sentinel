@@ -32,3 +32,7 @@ body {
   overflow-y: hidden;
   overflow-x: hidden;
 }
+
+.dragging {
+  opacity: 0.5;
+}
