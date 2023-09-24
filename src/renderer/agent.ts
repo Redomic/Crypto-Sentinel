@@ -10,6 +10,7 @@ const instance = axios.create({
 
 const blockchain = {
   getNodes: () => instance.get('/nodes'),
+  getNode: (id: string) => instance.get(`/node/${id}`),
 };
 
 export default { blockchain };

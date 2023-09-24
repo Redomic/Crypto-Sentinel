@@ -11,22 +11,26 @@ import NetworksPage from './Pages/NetworksPage';
 
 import Navbar from './components/Navbar';
 import AlertsPage from './Pages/AlertsPage';
+import NodePage from './Pages/NodePage';
 
 export default function App() {
   const dispatch = useDispatch();
+  const blockchain = useSelector((state: any) => state.blockchain);
 
   React.useEffect(() => {
-    agent.blockchain
-      .getNodes()
-      .then((res: any) => {
-        if (res.data.status === 'success') {
-          console.log(res.data);
-          dispatch(setNodes(res.data));
-        }
-      })
-      .catch((err: any) => {
-        console.log(err);
-      });
+    if (blockchain.nodes.length === 0) {
+      agent.blockchain
+        .getNodes()
+        .then((res: any) => {
+          if (res.data.status === 'success') {
+            console.log(res.data);
+            dispatch(setNodes(res.data));
+          }
+        })
+        .catch((err: any) => {
+          console.log(err);
+        });
+    }
   }, []);
 
   return (
@@ -35,6 +39,7 @@ export default function App() {
       <Routes>
         <Route path="/" element={<NetworksPage />} />
         <Route path="/alerts" element={<AlertsPage />} />
+        <Route path="/node/:id" element={<NodePage />} />
       </Routes>
     </Router>
   );

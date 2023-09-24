@@ -18,7 +18,13 @@ const initialState: CommonState = {
     y: 0,
     dragging: false,
   },
-  selected: {},
+  selected: {
+    nodeInfo: {},
+    graphData: {
+      nodes: [],
+      links: [],
+    },
+  },
 };
 
 export const commonSlice = createSlice({
@@ -38,7 +44,22 @@ export const commonSlice = createSlice({
     setSelected: (state, action: PayloadAction<object>) => {
       return {
         ...state,
-        selected: action.payload,
+        selected: {
+          ...state.selected,
+          nodeInfo: action.payload,
+        },
+      };
+    },
+    setSelectedGraph: (state, action: PayloadAction<any>) => {
+      return {
+        ...state,
+        selected: {
+          ...state.selected,
+          graphData: {
+            nodes: action.payload.nodes,
+            links: action.payload.links,
+          },
+        },
       };
     },
   },
