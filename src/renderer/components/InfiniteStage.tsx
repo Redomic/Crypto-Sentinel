@@ -1,59 +1,44 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-
 import { Stage, Layer, Rect, Circle, Line } from 'react-konva';
+import {
+  forceCenter,
+  forceCollide,
+  forceLink,
+  forceManyBody,
+  forceSimulation,
+} from 'd3-force';
 
-import { setDragging, setPosition } from '../store/slices/common';
+import ForceGraph2D from 'react-force-graph-2d';
+import ForceGraph3D from 'react-force-graph-3d';
+
+import { setDragging, setPosition, setSelected } from '../store/slices/common';
+import { setNodes } from '../store/slices/blockchain';
+
+import agent from '../agent';
+
+const WIDTH = 90;
+const HEIGHT = 90;
+
+const grid = [
+  ['#1A1A1A', '#1A1A1A'],
+  ['#1A1A1A', '#1A1A1A'],
+];
+
+const [CRIMINAL, SUSPICIOUS, NORMAL, OFFICIAL] = [
+  '#BC3326',
+  '#CE762A',
+  '#9ABB53',
+  '#0070D8',
+];
 
 function InfiniteStage() {
+  const blockchain = useSelector((state: any) => state.blockchain);
+  const stagePos = useSelector((state: any) => state.common.canvas);
+
+  const blockchainClone = structuredClone(blockchain);
+
   const dispatch = useDispatch();
-
-  const WIDTH = 90;
-  const HEIGHT = 90;
-
-  const grid = [
-    ['#1A1A1A', '#1A1A1A'],
-    ['#1A1A1A', '#1A1A1A'],
-  ];
-
-  const [DANGER, SUSPICIOUS, SAFE] = ['#BC3326', '#CE762A', '#9ABB53'];
-
-  const [nodes, setNodes] = React.useState([
-    {
-      id: 1,
-      x: 0,
-      y: 0,
-      color: DANGER,
-      transactions: [{ to: 3 }, { to: 2 }],
-    },
-    {
-      id: 4,
-      x: 300,
-      y: 100,
-      color: SAFE,
-      transactions: [{ to: 3 }, { to: 2 }],
-    },
-    {
-      id: 2,
-      x: 200,
-      y: -200,
-      color: SUSPICIOUS,
-      transactions: [{ to: 4 }, { to: 3 }],
-    },
-    {
-      id: 3,
-      x: 100,
-      y: 200,
-      color: SAFE,
-      transactions: [{ to: 1 }, { to: 3 }],
-    },
-  ]);
-
-  const [stagePos, setStagePos] = React.useState(
-    useSelector((state: any) => {
-      return state.common.canvas;
-    }),
-  );
 
   const startX = Math.floor((-stagePos.x - window.innerWidth) / WIDTH) * WIDTH;
   const endX =
@@ -89,30 +74,45 @@ function InfiniteStage() {
     }
   }
 
-  const lines: any = [];
-  nodes.map((node) => {
-    node.transactions.map((transaction) => {
-      const toNode = nodes.find((n) => n.id === transaction.to);
-
-      if (toNode) {
-        lines.push(
-          <Line
-            key={`${node.id}-${toNode.id}`}
-            points={[node.x, node.y, toNode.x, toNode.y]}
-            closed={true}
-            strokeLinearGradientStartPoint={{ x: node.x, y: node.y }} // Start point of the gradient
-            strokeLinearGradientEndPoint={{ x: toNode.x, y: toNode.y }} // End point of the gradient
-            strokeLinearGradientColorStops={[0, node.color, 1, toNode.color]} // Gradient color stops
-            stroke="white"
-            strokeWidth={3}
-            strokePriority="strokeLinearGradientColorStops"
-          />,
-        );
+  const nodeColorHandler = (n: any): string => {
+    if (n.flag === 'Normal') {
+      if (n.rating >= 8.0) {
+        return NORMAL;
       } else {
-        return null;
+        return SUSPICIOUS;
       }
-    });
-  });
+    } else if (n.flag === 'Criminal') {
+      return CRIMINAL;
+    } else if (n.flag === 'Official') {
+      return OFFICIAL;
+    } else {
+      return NORMAL;
+    }
+  };
+
+  const linkColorHandler = (link: any): string => {
+    // console.log(link);
+    if (link.source.flag === 'Normal') {
+      if (link.source.rating >= 8.0) {
+        return NORMAL;
+      } else {
+        return SUSPICIOUS;
+      }
+    } else if (link.source.flag === 'Criminal') {
+      return CRIMINAL;
+    } else if (link.source.flag === 'Official') {
+      return OFFICIAL;
+    } else {
+      return NORMAL;
+    }
+  };
+
+  const nodeOnClickHanlder = (node: any) => {
+    const clone = JSON.parse(JSON.stringify(node));
+    console.log('SELECTED NODE');
+    console.log(clone);
+    dispatch(setSelected(clone));
+  };
 
   React.useEffect(() => {
     dispatch(setPosition({ x: stagePos.x, y: stagePos.y }));
@@ -120,33 +120,18 @@ function InfiniteStage() {
   }, [stagePos]);
 
   return (
-    <Stage
-      x={stagePos.x}
-      y={stagePos.y}
-      width={window.innerWidth}
-      height={window.innerHeight}
-      draggable
-      onDragStart={(e) => {
-        setStagePos({ ...e.currentTarget.position(), dragging: true });
-      }}
-      onDragEnd={(e) => {
-        setStagePos({ ...e.currentTarget.position(), dragging: false });
-      }}
-    >
-      <Layer>{gridComponents}</Layer>
-      <Layer>{lines}</Layer>
-      <Layer>
-        {nodes.map((node: any) => (
-          <Circle
-            x={node.x}
-            y={node.y}
-            width={50}
-            height={50}
-            fill={node.color}
-          />
-        ))}
-      </Layer>
-    </Stage>
+    <>
+      <ForceGraph2D
+        graphData={blockchainClone}
+        nodeColor={nodeColorHandler}
+        onNodeClick={nodeOnClickHanlder}
+        nodeRelSize={6}
+        linkWidth={2}
+        backgroundColor="#1a1a1a"
+        linkColor={'#ced4da'}
+        enableNodeDrag={false}
+      />
+    </>
   );
 }
 

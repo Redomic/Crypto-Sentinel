@@ -8,6 +8,7 @@ export interface CommonState {
     y: number;
     dragging: boolean;
   };
+  selected: object;
 }
 
 const initialState: CommonState = {
@@ -17,6 +18,7 @@ const initialState: CommonState = {
     y: 0,
     dragging: false,
   },
+  selected: {},
 };
 
 export const commonSlice = createSlice({
@@ -33,10 +35,17 @@ export const commonSlice = createSlice({
     setDragging: (state, action: PayloadAction<boolean>) => {
       state.canvas.dragging = action.payload;
     },
+    setSelected: (state, action: PayloadAction<object>) => {
+      return {
+        ...state,
+        selected: action.payload,
+      };
+    },
   },
 });
 
 // Action creators are generated for each case reducer function
-export const { setLoading, setPosition, setDragging } = commonSlice.actions;
+export const { setLoading, setPosition, setDragging, setSelected } =
+  commonSlice.actions;
 
 export default commonSlice.reducer;
