@@ -26,7 +26,7 @@ function InfiniteStage() {
 
   const nodeColorHandler = (n: any): string => {
     if (n.flag === 'Normal') {
-      if (n.rating >= 8.0) {
+      if (n.rating >= 5.0) {
         return NORMAL;
       } else {
         return SUSPICIOUS;

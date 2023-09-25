@@ -20,6 +20,7 @@ const initialState: CommonState = {
   },
   selected: {
     nodeInfo: {},
+    transactions: [],
     graphData: {
       nodes: [],
       links: [],
@@ -50,6 +51,15 @@ export const commonSlice = createSlice({
         },
       };
     },
+    setTransactions: (state, action: PayloadAction<Array<object>>) => {
+      return {
+        ...state,
+        selected: {
+          ...state.selected,
+          transactions: action.payload,
+        },
+      };
+    },
     setSelectedGraph: (state, action: PayloadAction<any>) => {
       return {
         ...state,
@@ -66,7 +76,12 @@ export const commonSlice = createSlice({
 });
 
 // Action creators are generated for each case reducer function
-export const { setLoading, setPosition, setDragging, setSelected } =
-  commonSlice.actions;
+export const {
+  setLoading,
+  setPosition,
+  setDragging,
+  setTransactions,
+  setSelected,
+} = commonSlice.actions;
 
 export default commonSlice.reducer;

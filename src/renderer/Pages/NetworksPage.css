@@ -102,6 +102,7 @@
 }
 
 .node-info-container {
+  pointer-events: none;
   display: flex;
   position: absolute;
   align-items: center;
@@ -113,6 +114,7 @@
 }
 
 .node-info {
+  pointer-events: auto;
   z-index: 1;
   background-color: var(--primary);
   border: 2px solid #2e2e2e;
