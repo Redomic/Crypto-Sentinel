@@ -82,6 +82,7 @@ export const {
   setDragging,
   setTransactions,
   setSelected,
+  setSelectedGraph,
 } = commonSlice.actions;
 
 export default commonSlice.reducer;

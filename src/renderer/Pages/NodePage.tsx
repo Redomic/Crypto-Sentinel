@@ -1,12 +1,11 @@
 import React from 'react';
 import NodeInformation from '../components/NodeInformation';
 import agent from '../agent';
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { setTransactions } from '../store/slices/common';
 
 import './NodePage.css';
-import { stat } from 'fs';
 
 const NodePage = () => {
   const id: any = useParams().id;
@@ -47,7 +46,9 @@ const NodePage = () => {
             <span>Pages </span> / Node Information
             <h4>{selected.name}</h4>
           </div>
-          <button className="node__graph-button">Graph</button>
+          <Link to={`/node/${id}/graph`} className="node__graph-button">
+            Graph
+          </Link>
         </div>
         <div className="node__links-container">
           <div className="node__links-header">

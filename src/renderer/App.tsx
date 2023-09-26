@@ -1,4 +1,9 @@
-import { MemoryRouter as Router, Routes, Route } from 'react-router-dom';
+import {
+  MemoryRouter as Router,
+  Routes,
+  Route,
+  Navigate,
+} from 'react-router-dom';
 import './App.css';
 
 import React from 'react';
@@ -12,6 +17,8 @@ import NetworksPage from './Pages/NetworksPage';
 import Navbar from './components/Navbar';
 import AlertsPage from './Pages/AlertsPage';
 import NodePage from './Pages/NodePage';
+import NodeGraphPage from './Pages/NodeGraphPage';
+import ErrorPage from './Pages/ErrorPage';
 
 export default function App() {
   const dispatch = useDispatch();
@@ -38,8 +45,10 @@ export default function App() {
       <Navbar />
       <Routes>
         <Route path="/" element={<NetworksPage />} />
-        <Route path="/alerts" element={<AlertsPage />} />
+        <Route path="/alerts" element={<Navigate to={'/404'} />} />
         <Route path="/node/:id" element={<NodePage />} />
+        <Route path="/node/:id/graph" element={<Navigate to={'/404'} />} />
+        <Route path="/404" element={<ErrorPage />} />
       </Routes>
     </Router>
   );

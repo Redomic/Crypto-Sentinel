@@ -27,6 +27,10 @@
 }
 
 .node__graph-button {
+  text-decoration: none;
+  text-align: center;
+  display: flex;
+  align-items: center;
   font-family: Roboto;
   background-color: var(--secondary);
   border: none;
