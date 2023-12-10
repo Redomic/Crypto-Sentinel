@@ -68,16 +68,16 @@ const NodeGraphPage = () => {
     <>
       <NodeInformation />
       <PathInfo path={'/ Node Information / Graph'} h4={id} />
-      {/* <ForceGraph2D
+      <ForceGraph2D
         graphData={dataClone}
         nodeColor={nodeColorHandler}
         onNodeClick={nodeOnClickHanlder}
         nodeRelSize={6}
-        linkWidth={2}
+        linkWidth={3}
         backgroundColor="#1a1a1a"
         linkColor={(n: any) => '#252525'}
         enableNodeDrag={false}
-      /> */}
+      />
     </>
   );
 };

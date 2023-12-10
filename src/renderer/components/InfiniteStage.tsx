@@ -63,8 +63,12 @@ function InfiniteStage() {
         backgroundColor="#1a1a1a"
         linkColor={(n: any) => '#252525'}
         enableNodeDrag={false}
-        warmupTicks={200}
-        // cooldownTime={90000}
+        // warmupTicks={200}
+        // cooldownTime={0}
+        // linkDirectionalParticles={1}
+        // linkDirectionalParticleColor={(n: any) => '#252525'}
+        // linkDirectionalParticleWidth={6}
+        // linkDirectionalParticleSpeed={0.02}
       />
     </>
   );
