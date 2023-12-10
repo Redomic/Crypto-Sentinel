@@ -47,8 +47,8 @@ export default function App() {
         <Route path="/" element={<NetworksPage />} />
         <Route path="/alerts" element={<Navigate to={'/404'} />} />
         <Route path="/node/:id" element={<NodePage />} />
-        <Route path="/node/:id/graph" element={<Navigate to={'/404'} />} />
-        <Route path="/404" element={<ErrorPage />} />
+        {/* <Route path="/node/:id/graph" element={<Navigate to={'/404'} />} /> */}
+        {/* <Route path="/404" element={<ErrorPage />} /> */}
       </Routes>
     </Router>
   );
