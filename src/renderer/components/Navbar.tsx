@@ -6,11 +6,6 @@ import './Navbar.css';
 
 const Navbar = () => {
   const [tab, setTab] = React.useState('networks');
-  const [dragging, setDragging] = React.useState(
-    useSelector((state: any) => {
-      return state.common.canvas.dragging;
-    }),
-  );
 
   const networksIcon = (
     <svg
@@ -43,7 +38,7 @@ const Navbar = () => {
     </svg>
   );
 
-  const alertsIcon = (
+  const crawlerIcon = (
     <svg
       xmlns="http://www.w3.org/2000/svg"
       width="16"
@@ -101,15 +96,15 @@ const Navbar = () => {
           </Link>
           <Link
             className={`navbar__button ${
-              tab === 'alerts' ? 'navbar__button__selected' : null
+              tab === 'crawler' ? 'navbar__button__selected' : null
             }`}
             onClick={() => {
-              setTab('alerts');
+              setTab('crawler');
             }}
-            to={'/alerts'}
+            to={'/crawler'}
           >
-            <span className="navbar__button-icon">{alertsIcon}</span>
-            <span className="navbar__button-text">Alerts</span>
+            <span className="navbar__button-icon">{crawlerIcon}</span>
+            <span className="navbar__button-text">Crawler</span>
           </Link>
         </div>
       </div>

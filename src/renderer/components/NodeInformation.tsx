@@ -167,6 +167,9 @@ const NodeInformation = ({ isMoreInfo = false }: any) => {
               <button className="buttons__red">Mark Criminal</button>
               <button className="buttons__orange">Mark Suspicious</button>
             </div>
+            {isMoreInfo ? (
+              <button className="node-info__chat-btn">Block Bot</button>
+            ) : null}
           </div>
         </div>
       </>

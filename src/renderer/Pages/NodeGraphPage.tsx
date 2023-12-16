@@ -25,7 +25,7 @@ const NodeGraphPage = () => {
   const dataClone = structuredClone(data);
 
   const nodeOnClickHanlder = (node: any) => {
-    const clone = JSON.parse(JSON.stringify(node));
+    const clone = structuredClone(node);
     console.log('SELECTED NODE');
     console.log(clone);
     dispatch(setSelected(clone));
@@ -51,12 +51,12 @@ const NodeGraphPage = () => {
     agent.blockchain
       .getNodeGraph(id)
       .then((res: any) => {
-        // dispatch(
-        //   setSelectedGraph({
-        //     nodes: res.data.nodes,
-        //     links: res.data.links,
-        //   }),
-        // );
+        dispatch(
+          setSelectedGraph({
+            nodes: res.data.nodes,
+            links: res.data.links,
+          }),
+        );
         console.log(res.data);
       })
       .then((err) => {

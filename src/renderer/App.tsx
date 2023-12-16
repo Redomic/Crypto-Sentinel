@@ -45,9 +45,9 @@ export default function App() {
       <Navbar />
       <Routes>
         <Route path="/" element={<NetworksPage />} />
-        <Route path="/alerts" element={<Navigate to={'/404'} />} />
+        <Route path="/crawler" element={<Navigate to={'/404'} />} />
         <Route path="/node/:id" element={<NodePage />} />
-        {/* <Route path="/node/:id/graph" element={<Navigate to={'/404'} />} /> */}
+        <Route path="/node/:id/graph" element={<NodeGraphPage />} />
         {/* <Route path="/404" element={<ErrorPage />} /> */}
       </Routes>
     </Router>

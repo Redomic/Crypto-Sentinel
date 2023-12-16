@@ -216,6 +216,20 @@
   color: #b46622;
 }
 
+.node-info__chat-btn {
+  /* width: 50%; */
+  margin-top: 0.8rem;
+  border: none;
+  width: 100%;
+  height: 3rem;
+  border-radius: 0.6rem;
+  color: white;
+  font-weight: 600;
+  font-family: Roboto;
+  font-size: 0.8rem;
+  background-color: var(--secondary);
+}
+
 .node-info__wallet-icon__container {
   position: absolute;
   left: 86%;
