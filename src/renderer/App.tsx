@@ -19,6 +19,7 @@ import AlertsPage from './Pages/AlertsPage';
 import NodePage from './Pages/NodePage';
 import NodeGraphPage from './Pages/NodeGraphPage';
 import ErrorPage from './Pages/ErrorPage';
+import ChatOverlay from './components/ChatOverlay';
 
 export default function App() {
   const dispatch = useDispatch();
@@ -43,6 +44,7 @@ export default function App() {
   return (
     <Router>
       <Navbar />
+      <ChatOverlay />
       <Routes>
         <Route path="/" element={<NetworksPage />} />
         <Route path="/crawler" element={<Navigate to={'/404'} />} />

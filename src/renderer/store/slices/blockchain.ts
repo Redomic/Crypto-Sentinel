@@ -4,11 +4,19 @@ import type { PayloadAction } from '@reduxjs/toolkit';
 export interface BlockchainState {
   nodes: any;
   links: any;
+  chat: {
+    overlay: boolean;
+    messages: any;
+  };
 }
 
 const initialState: BlockchainState = {
   nodes: [],
   links: [],
+  chat: {
+    overlay: false,
+    messages: [],
+  },
 };
 
 export const blockchainSlice = createSlice({
@@ -23,10 +31,15 @@ export const blockchainSlice = createSlice({
         links: action.payload.links,
       };
     },
+    setMessage: (state, action: PayloadAction<any>) => {
+      state.chat.messages = [action.payload].concat(state.chat.messages);
+    },
+    setOverlay: (state, action: PayloadAction<boolean>) => {
+      state.chat.overlay = action.payload;
+    },
   },
 });
 
-// Action creators are generated for each case reducer function
-export const { setNodes } = blockchainSlice.actions;
+export const { setNodes, setMessage, setOverlay } = blockchainSlice.actions;
 
 export default blockchainSlice.reducer;

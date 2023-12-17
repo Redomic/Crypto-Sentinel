@@ -1,13 +1,16 @@
 import React from 'react';
 
 import '../Pages/NetworksPage.css';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
+import { setOverlay } from '../store/slices/blockchain';
 
 const NodeInformation = ({ isMoreInfo = false }: any) => {
   const selectedNode = useSelector((state: any) => {
     return state.common.selected.nodeInfo;
   });
+
+  const dispatch = useDispatch();
 
   const colorHandler = (node: any): string => {
     if (node.flag === 'Normal') {
@@ -168,7 +171,15 @@ const NodeInformation = ({ isMoreInfo = false }: any) => {
               <button className="buttons__orange">Mark Suspicious</button>
             </div>
             {isMoreInfo ? (
-              <button className="node-info__chat-btn">Block Bot</button>
+              <button
+                className="node-info__chat-btn"
+                onClick={() => {
+                  console.log('clicked');
+                  dispatch(setOverlay(true));
+                }}
+              >
+                Block Bot
+              </button>
             ) : null}
           </div>
         </div>
