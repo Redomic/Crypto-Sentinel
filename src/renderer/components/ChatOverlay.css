@@ -64,6 +64,7 @@
   margin: 0px;
   font-size: 1.3rem;
   margin-bottom: 1rem;
+  color: #6a6a6a;
 }
 
 .chat__message-container {
@@ -92,7 +93,7 @@
 }
 
 .chat__message-container li p {
-  color: #6a6a6a;
+  color: white;
   font-size: 0.9rem;
 }
 
@@ -118,4 +119,8 @@
   background-repeat: no-repeat;
   background-position: calc(100% - 1rem) center;
   color: white;
+}
+
+.chat__text-bar input:focus {
+  outline: 3px solid var(--green);
 }

@@ -3,7 +3,8 @@ import React from 'react';
 import '../Pages/NetworksPage.css';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { setOverlay } from '../store/slices/blockchain';
+import { setMessages, setOverlay } from '../store/slices/blockchain';
+import agent from '../agent';
 
 const NodeInformation = ({ isMoreInfo = false }: any) => {
   const selectedNode = useSelector((state: any) => {
@@ -51,6 +52,20 @@ const NodeInformation = ({ isMoreInfo = false }: any) => {
       return 'NaN';
     }
   };
+
+  React.useEffect(() => {
+    agent.blockchain
+      .getChat(selectedNode.id)
+      .then((res: any) => {
+        if (res.data.status === 'success') {
+          console.log(res.data);
+          dispatch(setMessages(res.data.messages));
+        }
+      })
+      .catch((err: any) => {
+        console.log(err);
+      });
+  }, [selectedNode]);
 
   if (selectedNode && Object.keys(selectedNode).length !== 0)
     return (

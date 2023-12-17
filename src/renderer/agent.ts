@@ -12,5 +12,9 @@ const blockchain = {
   getNodes: () => instance.get('/nodes'),
   getNode: (id: string) => instance.get(`/node/${id}`),
   getNodeGraph: (id: string) => instance.get(`/node/${id}/graph`),
+  getChat: (id: string) => instance.get(`/chat/${id}`),
+  postChat: (message: string, nodeId: string) =>
+    instance.post(`/chat`, { message: message, node: nodeId }),
 };
+
 export default { blockchain };

@@ -31,8 +31,8 @@ export const blockchainSlice = createSlice({
         links: action.payload.links,
       };
     },
-    setMessage: (state, action: PayloadAction<any>) => {
-      state.chat.messages = [action.payload].concat(state.chat.messages);
+    setMessages: (state, action: PayloadAction<any>) => {
+      state.chat.messages = action.payload;
     },
     setOverlay: (state, action: PayloadAction<boolean>) => {
       state.chat.overlay = action.payload;
@@ -40,6 +40,6 @@ export const blockchainSlice = createSlice({
   },
 });
 
-export const { setNodes, setMessage, setOverlay } = blockchainSlice.actions;
+export const { setNodes, setMessages, setOverlay } = blockchainSlice.actions;
 
 export default blockchainSlice.reducer;

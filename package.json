@@ -97,6 +97,7 @@
     "electron-debug": "^3.2.0",
     "electron-log": "^4.4.8",
     "electron-updater": "^6.1.4",
+    "marked": "^11.1.0",
     "pixi-viewport": "^5.0.2",
     "pixi.js": "^7.3.2",
     "react": "^18.2.0",
