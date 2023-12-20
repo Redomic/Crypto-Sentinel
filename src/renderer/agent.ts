@@ -15,6 +15,7 @@ const blockchain = {
   getChat: (id: string) => instance.get(`/chat/${id}`),
   postChat: (message: string, nodeId: string) =>
     instance.post(`/chat`, { message: message, node: nodeId }),
+  getCrawler: () => instance.get('/crawler'),
 };
 
 export default { blockchain };

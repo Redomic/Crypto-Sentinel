@@ -67,6 +67,43 @@ const NodeInformation = ({ isMoreInfo = false }: any) => {
       });
   }, [selectedNode]);
 
+  function generateRandomIP() {
+    const octet = () => Math.floor(Math.random() * 256);
+    return `${octet()}.${octet()}.${octet()}.${octet()}`;
+  }
+
+  const indianNames = [
+    'Aarav',
+    'Aditi',
+    'Arjun',
+    'Ananya',
+    'Dhruv',
+    'Ishaan',
+    'Kavya',
+    'Neha',
+    'Rohan',
+    'Saanvi',
+    'Vivek',
+    'Priya',
+  ];
+
+  const generateRandomInfo = () => {
+    function generateRandomPhoneNumber() {
+      let phoneNumber = '9'; // Most Indian mobile numbers start with 9
+      for (let i = 0; i < 9; i++) {
+        phoneNumber += Math.floor(Math.random() * 10);
+      }
+      return phoneNumber;
+    }
+
+    const randomName =
+      indianNames[Math.floor(Math.random() * indianNames.length)];
+
+    const randomPhoneNumber = generateRandomPhoneNumber();
+
+    return { name: randomName, phone: randomPhoneNumber };
+  };
+
   if (selectedNode && Object.keys(selectedNode).length !== 0)
     return (
       <>
@@ -136,13 +173,21 @@ const NodeInformation = ({ isMoreInfo = false }: any) => {
             </div>
             <div className="node-info__info">
               <div className="node-info__info-header">
+                <h5>Tagged Information</h5>
+              </div>
+              <div className="node-info__info-container">
+                <span>IP Address: {generateRandomIP()}</span>
+              </div>
+            </div>
+            <div className="node-info__info">
+              <div className="node-info__info-header">
                 <h5>Personal</h5>
                 <h5>Accuracy: 86%</h5>
               </div>
               <div className="node-info__info-container">
                 <span>Aadhar: 3977 8800 0234</span>
-                <span>Name: Rohit Kumar</span>
-                <span>Phone: 86666 99098</span>
+                <span>Name: {generateRandomInfo().name}</span>
+                <span>Phone: {generateRandomInfo().phone}</span>
               </div>
             </div>
             <div className="node-info__info">

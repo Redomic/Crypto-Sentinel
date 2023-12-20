@@ -21,6 +21,8 @@ import NodeGraphPage from './Pages/NodeGraphPage';
 import ErrorPage from './Pages/ErrorPage';
 import ChatOverlay from './components/ChatOverlay';
 import CrawlerPage from './Pages/CrawlerPage';
+// import MapPage from './Pages/MapPage';
+import RelaysPage from './Pages/RelaysPage';
 
 export default function App() {
   const dispatch = useDispatch();
@@ -51,6 +53,8 @@ export default function App() {
         <Route path="/crawler" element={<CrawlerPage />} />
         <Route path="/node/:id" element={<NodePage />} />
         <Route path="/node/:id/graph" element={<NodeGraphPage />} />
+        <Route path="/relays" element={<RelaysPage />} />
+        {/* <Route path="/node/:id/map" element={<MapPage />} /> */}
         {/* <Route path="/404" element={<ErrorPage />} /> */}
       </Routes>
     </Router>

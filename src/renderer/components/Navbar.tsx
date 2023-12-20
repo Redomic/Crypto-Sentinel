@@ -106,6 +106,30 @@ const Navbar = () => {
             <span className="navbar__button-icon">{crawlerIcon}</span>
             <span className="navbar__button-text">Crawler</span>
           </Link>
+          <Link
+            className={`navbar__button ${
+              tab === 'relays' ? 'navbar__button__selected' : null
+            }`}
+            onClick={() => {
+              setTab('relays');
+            }}
+            to={'/relays'}
+          >
+            <span className="navbar__button-icon">{networksIcon}</span>
+            <span className="navbar__button-text">Relays</span>
+          </Link>
+          <Link
+            className={`navbar__button ${
+              tab === 'watchlist' ? 'navbar__button__selected' : null
+            }`}
+            onClick={() => {
+              setTab('watchlist');
+            }}
+            to={'/watchlist'}
+          >
+            <span className="navbar__button-icon">{networksIcon}</span>
+            <span className="navbar__button-text">Watchlist</span>
+          </Link>
         </div>
       </div>
     </div>

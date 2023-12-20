@@ -2,8 +2,23 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 import './CrawlerPage.css';
+import agent from '../agent';
 
 const CrawlerPage = () => {
+  const [wallets, setWallets] = React.useState([]);
+
+  const tagHandler = (word: any) => {
+    if (word === 'porn') return 'Explicit';
+    if (word === 'drugs') return 'Narcotics';
+  };
+
+  React.useEffect(() => {
+    agent.blockchain.getCrawler().then((res) => {
+      if (res.data.status === 'success') {
+        setWallets(res.data.wallets);
+      }
+    });
+  }, []);
   return (
     <>
       <div className="crawler__container">
@@ -30,20 +45,24 @@ const CrawlerPage = () => {
             </div>
           </div>
           <div className="crawler__list-container">
-            <div className="crawler__list-element">
-              <div className="crawler__flag">CRIMINAL</div>
-              <div className="crawler__wallet">
-                Wallet: XXXXXXXXXXXXXXXXXXXX
-              </div>
-              <div className="crawler__tag-holder">
-                <span className="crawler__tag">Porn</span>
-                <span className="crawler__tag">Drugs</span>
-              </div>
-            </div>
-            <div className="crawler__list-element">text</div>
-            <div className="crawler__list-element">text</div>
-            <div className="crawler__list-element">text</div>
-            <div className="crawler__list-element">text</div>
+            {wallets.map((wallet: any) => {
+              return (
+                <div className="crawler__list-element">
+                  <div className="crawler__flag">CRIMINAL</div>
+                  <div className="crawler__wallet">
+                    Wallet ID:
+                    {' ' + wallet.walletId}
+                  </div>
+                  <div className="crawler__tag-holder">
+                    {wallet.keyword.map((word: any) => {
+                      return (
+                        <span className="crawler__tag">{tagHandler(word)}</span>
+                      );
+                    })}
+                  </div>
+                </div>
+              );
+            })}
           </div>
         </div>
       </div>
