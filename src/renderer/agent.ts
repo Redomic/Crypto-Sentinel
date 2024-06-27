@@ -1,10 +1,10 @@
 import axios from 'axios';
 
 const baseURL =
-  process.env.NODE_ENV === 'production' ? '' : 'http://localhost:5000/';
+  process.env.NODE_ENV === 'production' ? '' : 'http://localhost:5300/';
 
 const instance = axios.create({
-  baseURL: baseURL,
+  baseURL,
   withCredentials: true,
 });
 
